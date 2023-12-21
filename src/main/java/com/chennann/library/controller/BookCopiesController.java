@@ -1,6 +1,7 @@
 package com.chennann.library.controller;
 
 import com.chennann.library.pojo.BookCopy;
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Result;
 import com.chennann.library.service.BookCopyService;
 import com.chennann.library.utils.ThreadLocalUtil;
@@ -53,13 +54,24 @@ public class BookCopiesController {
         return Result.success();
     }
 
+//    @GetMapping("/findcopies")
+//    public Result<List<BookCopy>> findCopies (
+//            @RequestParam(required = false) String bookName,
+//            @RequestParam(required = false) Integer status
+//    ) {
+//
+//        List<BookCopy> bc = bookCopyService.findCopies(bookName, status);
+//        return Result.success(bc);
+//    }
+
     @GetMapping("/findcopies")
-    public Result<List<BookCopy>> findCopies (
+    public Result<PageBean<BookCopy>> findCopies (
+            Integer pageNum,
+            Integer pageSize,
             @RequestParam(required = false) String bookName,
             @RequestParam(required = false) Integer status
     ) {
-
-        List<BookCopy> bc = bookCopyService.findCopies(bookName, status);
-        return Result.success(bc);
+        PageBean<BookCopy> pg = bookCopyService.findCopies(pageNum, pageSize, bookName, status);
+        return Result.success(pg);
     }
 }

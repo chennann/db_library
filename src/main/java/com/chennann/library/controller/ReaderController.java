@@ -1,8 +1,6 @@
 package com.chennann.library.controller;
 
-import com.chennann.library.pojo.Borrow;
-import com.chennann.library.pojo.Reader;
-import com.chennann.library.pojo.Result;
+import com.chennann.library.pojo.*;
 import com.chennann.library.service.BorrowService;
 import com.chennann.library.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +21,56 @@ public class ReaderController {
     private BorrowService borrowService;
 
     @PostMapping("/add")
-    public Result<Integer> add (@RequestBody @Validated Reader reader) {
+    public Result<Integer> add(@RequestBody @Validated Reader reader) {
         readerService.add(reader);
         return Result.success(reader.getReaderId());
     }
 
+    //    @GetMapping("/list")
+//    public Result<List<Reader>> listAllReader () {
+//        List<Reader> rs = readerService.listAllReader();
+//        return Result.success(rs);
+//    }
     @GetMapping("/list")
-    public Result<List<Reader>> listAllReader () {
-        List<Reader> rs = readerService.listAllReader();
-        return Result.success(rs);
-
+    public Result<PageBean<Reader>> listAllReader(Integer pageNum, Integer pageSize) {
+        PageBean<Reader> pg = readerService.listAllReader(pageNum, pageSize);
+        return Result.success(pg);
     }
 
+    //    @GetMapping("/listborrows")
+//    public Result<List<Borrow>> listBorrowsByReaderId(
+//            @RequestParam(required = false) Integer readerId,
+//            @RequestParam Integer status
+//    ) {
+//        if (readerId == null) {
+//            List<Borrow> bs = borrowService.listAllBorrowsByStatus(status);
+//            return Result.success(bs);
+//        }
+//        if (status == 0) {
+//            List<Borrow> bs = borrowService.listBorrowsByReaderId(readerId);
+//            return Result.success(bs);
+//        } else {
+//            List<Borrow> bs = borrowService.listNotReturnedByReaderId(readerId);
+//            return Result.success(bs);
+//        }
+//    }
     @GetMapping("/listborrows")
-    public Result<List<Borrow>> listBorrowsByReaderId (
+    public Result<PageBean<Borrow>> listBorrowsByReaderId(
+            Integer pageNum,
+            Integer pageSize,
             @RequestParam(required = false) Integer readerId,
             @RequestParam Integer status
-            ) {
-        if (readerId == null ) {
-            List<Borrow> bs = borrowService.listAllBorrowsByStatus(status);
-            return Result.success(bs);
+    ) {
+        if (readerId == null) {
+            PageBean<Borrow> pg = borrowService.listAllBorrowsByStatus(pageNum, pageSize, status);
+            return Result.success(pg);
         }
         if (status == 0) {
-            List<Borrow> bs = borrowService.listBorrowsByReaderId(readerId);
-            return Result.success(bs);
-        }
-        else {
-            List<Borrow> bs = borrowService.listNotReturnedByReaderId(readerId);
-            return Result.success(bs);
+            PageBean<Borrow> pg = borrowService.listBorrowsByReaderId(pageNum, pageSize, readerId);
+            return Result.success(pg);
+        } else {
+            PageBean<Borrow> pg = borrowService.listNotReturnedByReaderId(pageNum, pageSize, readerId);
+            return Result.success(pg);
         }
     }
 

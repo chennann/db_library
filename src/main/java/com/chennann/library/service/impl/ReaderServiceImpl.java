@@ -1,12 +1,18 @@
 package com.chennann.library.service.impl;
 
 import com.chennann.library.mapper.ReaderMapper;
+import com.chennann.library.pojo.BookCopy;
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reader;
 import com.chennann.library.service.ReaderService;
+import com.chennann.library.utils.ThreadLocalUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReaderServiceImpl implements ReaderService {
@@ -26,9 +32,24 @@ public class ReaderServiceImpl implements ReaderService {
         return readerMapper.findById(readerId);
     }
 
-    @Override
-    public List<Reader> listAllReader() {
+//    @Override
+//    public List<Reader> listAllReader() {
+//
+//        return readerMapper.listAllReader();
+//    }
 
-        return readerMapper.listAllReader();
+    @Override
+    public PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize) {
+
+        PageBean<Reader> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        List<Reader> as = readerMapper.listAllReader();
+        Page<Reader> p = (Page<Reader>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 }

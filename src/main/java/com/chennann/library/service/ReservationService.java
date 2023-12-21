@@ -1,5 +1,6 @@
 package com.chennann.library.service;
 
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reservation;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public interface ReservationService {
 
     List<Reservation> findDueReservations();
 
-    List<Reservation> listAllReservation();
+//    List<Reservation> listAllReservation();
+    PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize);
 }

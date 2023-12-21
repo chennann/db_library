@@ -2,11 +2,14 @@ package com.chennann.library.service.impl;
 
 import com.chennann.library.mapper.ReservationMapper;
 import com.chennann.library.pojo.BookCopy;
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reader;
 import com.chennann.library.pojo.Reservation;
 import com.chennann.library.service.BookCopyService;
 import com.chennann.library.service.ReaderService;
 import com.chennann.library.service.ReservationService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,9 +62,23 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationMapper.findDueReservations();
     }
 
+//    @Override
+//    public List<Reservation> listAllReservation() {
+//
+//        return reservationMapper.listAllReservation();
+//    }
     @Override
-    public List<Reservation> listAllReservation() {
+    public PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize) {
 
-        return reservationMapper.listAllReservation();
+        PageBean<Reservation> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        List<Reservation> as = reservationMapper.listAllReservation();
+        Page<Reservation> p = (Page<Reservation>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 }

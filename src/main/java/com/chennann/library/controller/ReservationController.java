@@ -1,5 +1,6 @@
 package com.chennann.library.controller;
 
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reader;
 import com.chennann.library.pojo.Reservation;
 import com.chennann.library.pojo.Result;
@@ -37,9 +38,15 @@ public class ReservationController {
         return Result.success();
     }
 
+//    @GetMapping ("/list")
+//    public Result<List<Reservation>> listAllReservation () {
+//        List<Reservation> rs = reservationService.listAllReservation();
+//        return Result.success(rs);
+//    }
+
     @GetMapping ("/list")
-    public Result<List<Reservation>> listAllReservation () {
-        List<Reservation> rs = reservationService.listAllReservation();
-        return Result.success(rs);
+    public Result<PageBean<Reservation>> listAllReservation (Integer pageNum, Integer pageSize) {
+        PageBean<Reservation> pg = reservationService.listAllReservation(pageNum, pageSize);
+        return Result.success(pg);
     }
 }

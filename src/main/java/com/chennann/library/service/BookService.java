@@ -1,6 +1,7 @@
 package com.chennann.library.service;
 
 import com.chennann.library.pojo.Book;
+import com.chennann.library.pojo.PageBean;
 
 import java.util.List;
 
@@ -10,7 +11,8 @@ public interface BookService {
 
     void addBook(Book book);
 
-    List<Book> findBooks(String title, String author, String isbn);
+//    List<Book> findBooks(String title, String author, String isbn);
+    PageBean<Book> findBooks(Integer pageNum, Integer pageSize, String title, String author, String isbn);
 
     void updateCopies(Book book);
 }

@@ -2,7 +2,11 @@ package com.chennann.library.service.impl;
 
 import com.chennann.library.mapper.BorrowMapper;
 import com.chennann.library.pojo.Borrow;
+import com.chennann.library.pojo.PageBean;
+import com.chennann.library.pojo.Reader;
 import com.chennann.library.service.BorrowService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +38,44 @@ public class BorrowServiceImpl implements BorrowService {
         borrowMapper.record(borrow);
     }
 
+    //    @Override
+//    public List<Borrow> listBorrowsByReaderId(Integer readerId) {
+//
+//        return borrowMapper.listBorrowsByReaderId(readerId);
+//    }
     @Override
-    public List<Borrow> listBorrowsByReaderId(Integer readerId) {
+    public PageBean<Borrow> listBorrowsByReaderId(Integer pageNum, Integer pageSize, Integer readerId) {
 
-        return borrowMapper.listBorrowsByReaderId(readerId);
+        PageBean<Borrow> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        List<Borrow> as = borrowMapper.listBorrowsByReaderId(readerId);
+        Page<Borrow> p = (Page<Borrow>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 
+    //    @Override
+//    public List<Borrow> listNotReturnedByReaderId(Integer readerId) {
+//
+//        return borrowMapper.listNotReturnedByReaderId(readerId);
+//    }
     @Override
-    public List<Borrow> listNotReturnedByReaderId(Integer readerId) {
+    public PageBean<Borrow> listNotReturnedByReaderId(Integer pageNum, Integer pageSize, Integer readerId) {
 
-        return borrowMapper.listNotReturnedByReaderId(readerId);
+        PageBean<Borrow> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        List<Borrow> as = borrowMapper.listNotReturnedByReaderId(readerId);
+        Page<Borrow> p = (Page<Borrow>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 
     @Override
@@ -64,10 +96,24 @@ public class BorrowServiceImpl implements BorrowService {
         return borrowMapper.findBorrowById(borrowingId);
     }
 
+    //    @Override
+//    public List<Borrow> listAllBorrowsByStatus(Integer status) {
+//
+//        return borrowMapper.listAllBorrowsByStatus(status);
+//    }
     @Override
-    public List<Borrow> listAllBorrowsByStatus(Integer status) {
+    public PageBean<Borrow> listAllBorrowsByStatus(Integer pageNum, Integer pageSize, Integer status) {
 
-        return borrowMapper.listAllBorrowsByStatus(status);
+        PageBean<Borrow> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        List<Borrow> as = borrowMapper.listAllBorrowsByStatus(status);
+        Page<Borrow> p = (Page<Borrow>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 
 

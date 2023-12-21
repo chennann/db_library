@@ -3,6 +3,7 @@ package com.chennann.library.service;
 import com.chennann.library.pojo.Book;
 import com.chennann.library.pojo.BookCopy;
 import com.chennann.library.pojo.Borrow;
+import com.chennann.library.pojo.PageBean;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public interface BookCopyService {
 
     void allocate(BookCopy bookCopy);
 
-    List<BookCopy> findCopies(String bookName, Integer status);
+//    List<BookCopy> findCopies(String bookName, Integer status);
+    PageBean<BookCopy> findCopies(Integer pageNum, Integer pageSize, String bookname, Integer status);
 
     void record(Borrow borrow);
 

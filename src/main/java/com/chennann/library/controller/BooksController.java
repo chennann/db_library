@@ -2,6 +2,7 @@ package com.chennann.library.controller;
 
 
 import com.chennann.library.pojo.Book;
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Result;
 import com.chennann.library.service.BookCopyService;
 import com.chennann.library.service.BookService;
@@ -21,16 +22,29 @@ public class BooksController {
     @Autowired
     private BookCopyService bookCopyService;
 
+//    @GetMapping("/find")
+//    public Result<List<Book>> findBooks (
+//            @RequestParam(required = false) String title,
+//            @RequestParam(required = false) String author,
+//            @RequestParam(required = false) String isbn
+//    ) {
+//        List<Book> bc = bookService.findBooks(title, author, isbn);
+//        return Result.success(bc);
+//    }
     @GetMapping("/find")
-    public Result<List<Book>> findBooks (
+    public Result<PageBean<Book>> findBooks (
+            Integer pageNum,
+            Integer pageSize,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String author,
             @RequestParam(required = false) String isbn
     ) {
-        List<Book> bc = bookService.findBooks(title, author, isbn);
+        PageBean<Book> bc = bookService.findBooks(pageNum, pageSize, title, author, isbn);
         return Result.success(bc);
     }
 
+
+    //listall多余
     @GetMapping("/listall")
     public Result<List<Book>> listAllBooks () {
         List<Book> bc = bookService.listAllBooks();
@@ -39,8 +53,8 @@ public class BooksController {
 
     @PostMapping("/add")
     public Result addBook (@RequestBody @Validated Book book) {
-        List<Book> bc = bookService.findBooks(book.getTitle(), book.getAuthor(), book.getIsbn());
-        if (bc.isEmpty()) {
+        PageBean<Book> bc = bookService.findBooks(1, 5, book.getTitle(), book.getAuthor(), book.getIsbn());
+        if (bc.getTotal() == 0) {
             //没有图书，新增图书
             bookService.addBook(book);
             bookCopyService.toDefaultLocation(book, 0);
@@ -48,7 +62,8 @@ public class BooksController {
         else {
             //已有图书，新增册数
             int increaseNumber = book.getCopies();
-            int oldNumber = bc.get(0).getCopies();
+//            int oldNumber = bc.get(0).getCopies();
+            int oldNumber = bc.getItems().get(0).getCopies();
             int newCopyNumber = increaseNumber + oldNumber;
 
             bookCopyService.toDefaultLocation(book, oldNumber);

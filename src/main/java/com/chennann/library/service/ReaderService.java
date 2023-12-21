@@ -1,5 +1,6 @@
 package com.chennann.library.service;
 
+import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reader;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface ReaderService {
 
     Reader findById(Integer readerId);
 
-    List<Reader> listAllReader();
+    PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize);
 }

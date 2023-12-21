@@ -47,8 +47,8 @@ public class BorrowController {
         }
 
         //检查读者借书册数
-        List<Borrow> borrowList = borrowService.listNotReturnedByReaderId(borrow.getReaderId());
-        if (borrowList.size()>=10) {
+        PageBean<Borrow> borrowList = borrowService.listNotReturnedByReaderId(1, 5, borrow.getReaderId());
+        if (borrowList.getTotal()>=10) {
             return Result.error("借阅书籍超过10本，借阅失败");
         }
 
