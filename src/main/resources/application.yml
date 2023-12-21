@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library
+    username: root
+    password: chen1010200220
+  mail:
+    host: smtp.qq.com
+    username: 2662720741@qq.com
+    password: megxsecvsoxfebea
+    default-encoding: utf-8
+    port: 465
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+            fallback: false
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: chen1010200220
+    key-store-type: PKCS12
+    key-alias: aliyunSSL
+
+

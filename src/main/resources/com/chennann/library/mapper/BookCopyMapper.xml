@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chennann.library.mapper.BookCopyMapper">
+
+    <insert id="toDefaultLocation">
+        INSERT INTO bookcopies (bookId, isbn, location, status, librarianNumber)
+        VALUES
+        <foreach collection="list" item="bookcopy" separator=",">
+            (#{bookcopy.bookId}, #{bookcopy.isbn}, #{bookcopy.location}, #{bookcopy.status}, #{bookcopy.librarianNumber})
+        </foreach>
+    </insert>
+    <select id="findCopies" resultType="com.chennann.library.pojo.BookCopy">
+        select * from bookcopies bc JOIN books b ON bc.isbn = b.isbn
+        <where>
+            <if test="bookName != null">
+                b.title like CONCAT('%', #{bookName}, '%')
+            </if>
+            <choose>
+                <when test="status == 1">
+                    and bc.status = '未借出'
+                </when>
+                <when test="status == 2">
+                    and bc.status = '不外借'
+                </when>
+                <when test="status == 3">
+                    and bc.status = '已借出'
+                </when>
+                <when test="status == 4">
+                    and bc.status = '已预约'
+                </when>
+
+            </choose>
+        </where>
+    </select>
+</mapper>
