@@ -83,15 +83,7 @@ public class BorrowController {
         borrowService.returnCopy(borrowingId);
 
         List<Reservation> rs = reservationService.findByISBN(ISBN);
-//        for (Reservation r : rs) {
-//            Reader reader = readerService.findById(r.getReaderId());
-//            String email = reader.getEmail();
-//            emailService.sendEmail(
-//                    reader.getEmail(),
-//                    "预约提醒",
-//                    "亲爱的 " + reader.getReaderId() + " 号读者, 您预约的图书（ISBN） " + ISBN + " 现在可以借阅 "
-//            );
-//        }
+
         if (rs.size()>0) {
             bookCopyService.returnCopy(bookId, "已预约");
             Reservation r = rs.get(0);

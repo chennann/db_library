@@ -37,23 +37,7 @@ public class ReaderController {
         return Result.success(pg);
     }
 
-    //    @GetMapping("/listborrows")
-//    public Result<List<Borrow>> listBorrowsByReaderId(
-//            @RequestParam(required = false) Integer readerId,
-//            @RequestParam Integer status
-//    ) {
-//        if (readerId == null) {
-//            List<Borrow> bs = borrowService.listAllBorrowsByStatus(status);
-//            return Result.success(bs);
-//        }
-//        if (status == 0) {
-//            List<Borrow> bs = borrowService.listBorrowsByReaderId(readerId);
-//            return Result.success(bs);
-//        } else {
-//            List<Borrow> bs = borrowService.listNotReturnedByReaderId(readerId);
-//            return Result.success(bs);
-//        }
-//    }
+
     @GetMapping("/listborrows")
     public Result<PageBean<Borrow>> listBorrowsByReaderId(
             Integer pageNum,

@@ -54,15 +54,7 @@ public class BookCopiesController {
         return Result.success();
     }
 
-//    @GetMapping("/findcopies")
-//    public Result<List<BookCopy>> findCopies (
-//            @RequestParam(required = false) String bookName,
-//            @RequestParam(required = false) Integer status
-//    ) {
-//
-//        List<BookCopy> bc = bookCopyService.findCopies(bookName, status);
-//        return Result.success(bc);
-//    }
+
 
     @GetMapping("/findcopies")
     public Result<PageBean<BookCopy>> findCopies (

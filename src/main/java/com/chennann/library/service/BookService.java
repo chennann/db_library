@@ -11,7 +11,6 @@ public interface BookService {
 
     void addBook(Book book);
 
-//    List<Book> findBooks(String title, String author, String isbn);
     PageBean<Book> findBooks(Integer pageNum, Integer pageSize, String title, String author, String isbn);
 
     void updateCopies(Book book);

@@ -22,15 +22,7 @@ public class BooksController {
     @Autowired
     private BookCopyService bookCopyService;
 
-//    @GetMapping("/find")
-//    public Result<List<Book>> findBooks (
-//            @RequestParam(required = false) String title,
-//            @RequestParam(required = false) String author,
-//            @RequestParam(required = false) String isbn
-//    ) {
-//        List<Book> bc = bookService.findBooks(title, author, isbn);
-//        return Result.success(bc);
-//    }
+
     @GetMapping("/find")
     public Result<PageBean<Book>> findBooks (
             Integer pageNum,

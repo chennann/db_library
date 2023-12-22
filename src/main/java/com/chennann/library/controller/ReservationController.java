@@ -38,11 +38,7 @@ public class ReservationController {
         return Result.success();
     }
 
-//    @GetMapping ("/list")
-//    public Result<List<Reservation>> listAllReservation () {
-//        List<Reservation> rs = reservationService.listAllReservation();
-//        return Result.success(rs);
-//    }
+
 
     @GetMapping ("/list")
     public Result<PageBean<Reservation>> listAllReservation (Integer pageNum, Integer pageSize) {
