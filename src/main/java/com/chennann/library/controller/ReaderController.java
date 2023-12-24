@@ -26,14 +26,15 @@ public class ReaderController {
         return Result.success(reader.getReaderId());
     }
 
-    //    @GetMapping("/list")
-//    public Result<List<Reader>> listAllReader () {
-//        List<Reader> rs = readerService.listAllReader();
-//        return Result.success(rs);
-//    }
+
     @GetMapping("/list")
-    public Result<PageBean<Reader>> listAllReader(Integer pageNum, Integer pageSize) {
-        PageBean<Reader> pg = readerService.listAllReader(pageNum, pageSize);
+    public Result<PageBean<Reader>> listAllReader(
+            Integer pageNum,
+            Integer pageSize,
+            @RequestParam(required = false) Integer readerId,
+            @RequestParam(required = false) String name
+    ) {
+        PageBean<Reader> pg = readerService.listAllReader(pageNum, pageSize, readerId, name);
         return Result.success(pg);
     }
 

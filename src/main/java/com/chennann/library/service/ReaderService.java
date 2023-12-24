@@ -11,7 +11,7 @@ public interface ReaderService {
 
     Reader findById(Integer readerId);
 
-    PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize);
+    PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize, Integer readerId, String name);
 
     void deleteReaderById(Integer readerId);
 

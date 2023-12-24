@@ -17,8 +17,8 @@ public interface ReaderMapper {
     @Select("select * from readers where readerId=#{readerId}")
     Reader findById(Integer readerId);
 
-    @Select("select * from readers")
-    List<Reader> listAllReader();
+//    @Select("select * from readers")
+    List<Reader> listAllReader(Integer readerId, String name);
 
     @Delete("delete from readers where readerId=#{readerId}")
     void deleteReaderById(Integer readerId);

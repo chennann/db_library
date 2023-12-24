@@ -8,4 +8,15 @@
     <insert id="add" useGeneratedKeys="true" keyProperty="readerId">
         insert into readers (name, phone, email) values (#{name}, #{phone}, #{email})
     </insert>
+    <select id="listAllReader" resultType="com.chennann.library.pojo.Reader">
+        select * from readers
+            <where>
+                <if test="readerId != null ">
+                    and readerId = #{readerId}
+                </if>
+                <if test="name != null">
+                    and name like concat('%', #{name}, '%')
+                </if>
+            </where>
+    </select>
 </mapper>

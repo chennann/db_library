@@ -39,13 +39,13 @@ public class ReaderServiceImpl implements ReaderService {
 //    }
 
     @Override
-    public PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize) {
+    public PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize, Integer readerId, String name) {
 
         PageBean<Reader> pb = new PageBean<>();
         PageHelper.startPage(pageNum, pageSize);
 
 
-        List<Reader> as = readerMapper.listAllReader();
+        List<Reader> as = readerMapper.listAllReader(readerId, name);
         Page<Reader> p = (Page<Reader>) as;
 
         pb.setTotal(p.getTotal());
