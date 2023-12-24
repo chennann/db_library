@@ -21,4 +21,6 @@ public interface BorrowService {
 
 
     PageBean<Borrow> listAllBorrowsByStatus(Integer pageNum, Integer pageSize,Integer status);
+
+    PageBean<Borrow> listAllBorrows(Integer pageNum, Integer pageSize);
 }

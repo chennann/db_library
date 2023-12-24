@@ -8,12 +8,13 @@
     <select id="listAllBorrowsByStatus" resultType="com.chennann.library.pojo.Borrow">
         select * from borrowings
         <where>
-            <if test="status == 1">
-                returnTime is null
-            </if>
-            <if test="status != 1">
+            <if test="status == 0">
                 returnTime is not null
             </if>
+            <if test="status != 0">
+                returnTime is null
+            </if>
         </where>
+        order by borrowTime desc
     </select>
 </mapper>

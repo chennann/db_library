@@ -15,10 +15,10 @@ public interface BorrowMapper {
             " values (#{readerId}, #{bookId}, #{borrowTime}, #{dueTime})")
     void record(Borrow borrow);
 
-    @Select("select * from borrowings where readerId=#{readerId}")
+    @Select("select * from borrowings where readerId=#{readerId}  order by borrowTime desc")
     List<Borrow> listBorrowsByReaderId(Integer readerId);
 
-    @Select("select * from borrowings where readerId=#{readerId} and returnTime is NULL")
+    @Select("select * from borrowings where readerId=#{readerId} and returnTime is NULL order by borrowTime desc")
     List<Borrow> listNotReturnedByReaderId(Integer readerId);
 
     @Select("select b.*, r.email from borrowings b join readers r on r.readerId = b.readerId where dueTime < now() and returnTime is null")
@@ -32,4 +32,7 @@ public interface BorrowMapper {
 
 
     List<Borrow> listAllBorrowsByStatus(Integer status);
+
+    @Select("select * from borrowings order by borrowTime desc")
+    List<Borrow> listAllBorrows();
 }

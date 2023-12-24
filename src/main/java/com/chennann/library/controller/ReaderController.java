@@ -44,13 +44,18 @@ public class ReaderController {
             Integer pageNum,
             Integer pageSize,
             @RequestParam(required = false) Integer readerId,
-            @RequestParam Integer status
+            @RequestParam(required = false) Integer status
     ) {
-        if (readerId == null) {
+        if (status == null && readerId == null) {
+            PageBean<Borrow> pg = borrowService.listAllBorrows(pageNum, pageSize);
+            return Result.success(pg);
+        }
+        if (status != null && readerId == null) {
             PageBean<Borrow> pg = borrowService.listAllBorrowsByStatus(pageNum, pageSize, status);
             return Result.success(pg);
         }
-        if (status == 0) {
+
+        if (status == null || status == 0) {
             PageBean<Borrow> pg = borrowService.listBorrowsByReaderId(pageNum, pageSize, readerId);
             return Result.success(pg);
         } else {

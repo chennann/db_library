@@ -116,5 +116,19 @@ public class BorrowServiceImpl implements BorrowService {
         return pb;
     }
 
+    @Override
+    public PageBean<Borrow> listAllBorrows(Integer pageNum, Integer pageSize) {
+
+        PageBean<Borrow> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Borrow> as = borrowMapper.listAllBorrows();
+        Page<Borrow> p = (Page<Borrow>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
+    }
+
 
 }
