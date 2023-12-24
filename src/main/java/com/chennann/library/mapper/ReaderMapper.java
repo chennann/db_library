@@ -4,6 +4,7 @@ import com.chennann.library.pojo.Reader;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface ReaderMapper {
 
     @Delete("delete from readers where readerId=#{readerId}")
     void deleteReaderById(Integer readerId);
+
+    @Update("update readers set name=#{name},phone=#{phone},email=#{email} where readerId=#{readerId}")
+    void updateReader(Reader reader);
 }

@@ -14,4 +14,6 @@ public interface ReaderService {
     PageBean<Reader> listAllReader(Integer pageNum, Integer pageSize);
 
     void deleteReaderById(Integer readerId);
+
+    void updateReader(Reader reader);
 }

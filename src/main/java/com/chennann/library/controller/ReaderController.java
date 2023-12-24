@@ -64,5 +64,10 @@ public class ReaderController {
         return Result.success();
     }
 
+    @PutMapping("/update")
+    public Result updateReader(@RequestBody @Validated Reader reader) {
+        readerService.updateReader(reader);
+        return Result.success();
+    }
 
 }
