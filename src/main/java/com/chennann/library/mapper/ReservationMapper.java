@@ -24,6 +24,6 @@ public interface ReservationMapper {
     @Select("select * from reservations where reservationDueTime < now()")
     List<Reservation> findDueReservations();
 
-    @Select("select * from reservations")
-    List<Reservation> listAllReservation();
+//    @Select("select * from reservations")
+    List<Reservation> listAllReservation(Integer readerId);
 }

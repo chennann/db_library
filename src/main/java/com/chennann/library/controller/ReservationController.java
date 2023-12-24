@@ -41,8 +41,8 @@ public class ReservationController {
 
 
     @GetMapping ("/list")
-    public Result<PageBean<Reservation>> listAllReservation (Integer pageNum, Integer pageSize) {
-        PageBean<Reservation> pg = reservationService.listAllReservation(pageNum, pageSize);
+    public Result<PageBean<Reservation>> listAllReservation (Integer pageNum, Integer pageSize, Integer readerId) {
+        PageBean<Reservation> pg = reservationService.listAllReservation(pageNum, pageSize, readerId);
         return Result.success(pg);
     }
 }

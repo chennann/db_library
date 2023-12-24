@@ -68,13 +68,13 @@ public class ReservationServiceImpl implements ReservationService {
 //        return reservationMapper.listAllReservation();
 //    }
     @Override
-    public PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize) {
+    public PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize, Integer readerId) {
 
         PageBean<Reservation> pb = new PageBean<>();
         PageHelper.startPage(pageNum, pageSize);
 
 
-        List<Reservation> as = reservationMapper.listAllReservation();
+        List<Reservation> as = reservationMapper.listAllReservation(readerId);
         Page<Reservation> p = (Page<Reservation>) as;
 
         pb.setTotal(p.getTotal());

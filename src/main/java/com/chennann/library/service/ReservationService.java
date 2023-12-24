@@ -17,5 +17,5 @@ public interface ReservationService {
 
     List<Reservation> findDueReservations();
 
-    PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize);
+    PageBean<Reservation> listAllReservation(Integer pageNum, Integer pageSize, Integer readerId);
 }

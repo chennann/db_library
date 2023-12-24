@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chennann.library.mapper.ReservationMapper">
+
+    <select id="listAllReservation" resultType="com.chennann.library.pojo.Reservation">
+        select * from reservations
+            <where>
+                <if test="readerId != null">
+                    and readerId = #{readerId}
+                </if>
+            </where>
+    </select>
+</mapper>
