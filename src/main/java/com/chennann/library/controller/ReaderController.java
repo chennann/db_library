@@ -58,5 +58,11 @@ public class ReaderController {
         }
     }
 
+    @DeleteMapping("/delete")
+    public Result deleteReaderById(Integer readerId) {
+        readerService.deleteReaderById(readerId);
+        return Result.success();
+    }
+
 
 }

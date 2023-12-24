@@ -52,4 +52,9 @@ public class ReaderServiceImpl implements ReaderService {
         pb.setItems(p.getResult());
         return pb;
     }
+
+    @Override
+    public void deleteReaderById(Integer readerId) {
+        readerMapper.deleteReaderById(readerId);
+    }
 }
