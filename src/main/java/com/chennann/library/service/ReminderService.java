@@ -48,7 +48,7 @@ public class ReminderService {
             if (reservation.getBookId() != null) {
                 bookCopyService.changeCopyStatus(reservation.getBookId(), "未借出");
             }
-            reservationService.cancel(reservation);
+            reservationService.cancel(reservation.getReaderId(), reservation.getIsbn());
         }
     }
 }

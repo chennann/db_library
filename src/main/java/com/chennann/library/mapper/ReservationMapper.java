@@ -16,7 +16,7 @@ public interface ReservationMapper {
     List<Reservation> findByISBN(String isbn);
 
     @Delete("delete from reservations where readerId=#{readerId} and isbn=#{isbn}")
-    void cancel(Reservation reservation);
+    void cancel(Integer readerId, String isbn);
 
     @Update("update reservations set bookId=#{bookId} where reservationId=#{reservationId}")
     void setBookId(Reservation r);

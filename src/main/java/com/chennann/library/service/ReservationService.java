@@ -11,7 +11,7 @@ public interface ReservationService {
 
     List<Reservation> findByISBN(String isbn);
 
-    void cancel(Reservation reservation);
+    void cancel(Integer readerId, String isbn);
 
     void setBookId(Reservation r);
 

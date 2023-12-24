@@ -47,8 +47,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void cancel(Reservation reservation) {
-        reservationMapper.cancel(reservation);
+    public void cancel(Integer readerId, String isbn) {
+        reservationMapper.cancel(readerId, isbn);
     }
 
     @Override

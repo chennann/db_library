@@ -30,11 +30,15 @@ public class ReservationController {
     }
 
     @DeleteMapping("/cancel")
-    public Result cancel (@RequestBody @Validated Reservation reservation) {
-        if (reservation.getBookId() != null) {
-            bookCopyService.changeCopyStatus(reservation.getBookId(), "未借出");
+    public Result cancel (
+            Integer readerId,
+            String isbn,
+            @RequestParam(required = false) String bookId
+    ) {
+        if (bookId != null) {
+            bookCopyService.changeCopyStatus(bookId, "未借出");
         }
-        reservationService.cancel(reservation);
+        reservationService.cancel(readerId, isbn);
         return Result.success();
     }
 
