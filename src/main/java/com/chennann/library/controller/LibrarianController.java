@@ -4,13 +4,11 @@ import com.chennann.library.pojo.Librarian;
 import com.chennann.library.service.LibrarianService;
 import com.chennann.library.pojo.Result;
 import com.chennann.library.utils.JwtUtil;
+import com.chennann.library.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,5 +47,15 @@ public class LibrarianController {
             operations.set(token, token, 1, TimeUnit.HOURS);
             return Result.success(token);
         }
+    }
+
+    @GetMapping("/librarianInfo")
+    public Result<Librarian> userInfo () {
+
+        Map<String, Object> map= ThreadLocalUtil.get();
+
+        Librarian librarian = librarianService.findByLibrarianId((Integer) map.get("id"));
+
+        return Result.success(librarian);
     }
 }

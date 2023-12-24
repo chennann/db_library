@@ -24,4 +24,11 @@ public class LibrarianServiceImpl implements LibrarianService {
         Librarian librarian = librarianMapper.findLibrarian(librarianNumber, name);
         return librarian;
     }
+
+    @Override
+    public Librarian findByLibrarianId(Integer id) {
+
+        Librarian librarian = librarianMapper.findByLibrarianId(id);
+        return librarian;
+    }
 }

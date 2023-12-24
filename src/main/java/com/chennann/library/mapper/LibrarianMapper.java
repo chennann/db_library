@@ -15,4 +15,7 @@ public interface LibrarianMapper {
 
     @Select("select * from librarians where librarianNumber=#{librarianNumber} and name=#{name}")
     Librarian findLibrarian(String librarianNumber, String name);
+
+    @Select("select * from librarians where librarianId =#{id}")
+    Librarian findByLibrarianId(Integer id);
 }
