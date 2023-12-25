@@ -17,4 +17,21 @@
         </where>
         order by borrowTime desc
     </select>
+    <select id="listBorrowsByReaderIdAndStatus" resultType="com.chennann.library.pojo.Borrow">
+        select * from borrowings
+        <where>
+            <if test="readerId != null">
+                and readerId = #{readerId}
+            </if>
+            <choose>
+                <when test="status == 0">
+                    and returnTime is not null
+                </when>
+                <when test="status == 1">
+                    and returnTime is null
+                </when>
+            </choose>
+        </where>
+        order by borrowTime desc
+    </select>
 </mapper>

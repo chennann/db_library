@@ -35,4 +35,6 @@ public interface BorrowMapper {
 
     @Select("select * from borrowings order by borrowTime desc")
     List<Borrow> listAllBorrows();
+
+    List<Borrow> listBorrowsByReaderIdAndStatus(Integer readerId, Integer status);
 }

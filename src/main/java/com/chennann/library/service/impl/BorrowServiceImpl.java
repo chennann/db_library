@@ -130,5 +130,19 @@ public class BorrowServiceImpl implements BorrowService {
         return pb;
     }
 
+    @Override
+    public PageBean<Borrow> listBorrowsByReaderIdAndStatus(Integer pageNum, Integer pageSize, Integer readerId, Integer status) {
+
+        PageBean<Borrow> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Borrow> as = borrowMapper.listBorrowsByReaderIdAndStatus(readerId, status);
+        Page<Borrow> p = (Page<Borrow>) as;
+
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
+    }
+
 
 }

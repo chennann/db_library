@@ -46,22 +46,25 @@ public class ReaderController {
             @RequestParam(required = false) Integer readerId,
             @RequestParam(required = false) Integer status
     ) {
-        if (status == null && readerId == null) {
-            PageBean<Borrow> pg = borrowService.listAllBorrows(pageNum, pageSize);
-            return Result.success(pg);
-        }
-        if (status != null && readerId == null) {
-            PageBean<Borrow> pg = borrowService.listAllBorrowsByStatus(pageNum, pageSize, status);
-            return Result.success(pg);
-        }
 
-        if (status == null || status == 0) {
-            PageBean<Borrow> pg = borrowService.listBorrowsByReaderId(pageNum, pageSize, readerId);
-            return Result.success(pg);
-        } else {
-            PageBean<Borrow> pg = borrowService.listNotReturnedByReaderId(pageNum, pageSize, readerId);
-            return Result.success(pg);
-        }
+        PageBean<Borrow> pg = borrowService.listBorrowsByReaderIdAndStatus(pageNum, pageSize, readerId, status);
+        return Result.success(pg);
+//        if (status == null && readerId == null) {
+//            PageBean<Borrow> pg = borrowService.listAllBorrows(pageNum, pageSize);
+//            return Result.success(pg);
+//        }
+//        if (status != null && readerId == null) {
+//            PageBean<Borrow> pg = borrowService.listAllBorrowsByStatus(pageNum, pageSize, status);
+//            return Result.success(pg);
+//        }
+//
+//        if (status == null || status == 0) {
+//            PageBean<Borrow> pg = borrowService.listBorrowsByReaderId(pageNum, pageSize, readerId);
+//            return Result.success(pg);
+//        } else {
+//            PageBean<Borrow> pg = borrowService.listNotReturnedByReaderId(pageNum, pageSize, readerId);
+//            return Result.success(pg);
+//        }
     }
 
     @DeleteMapping("/delete")
