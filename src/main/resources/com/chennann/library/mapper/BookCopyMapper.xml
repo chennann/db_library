@@ -32,6 +32,9 @@
                 </when>
 
             </choose>
+            <if test="bookId != null">
+                and bc.bookId = #{bookId}
+            </if>
         </where>
     </select>
 </mapper>

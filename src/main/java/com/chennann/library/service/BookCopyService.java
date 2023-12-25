@@ -14,7 +14,7 @@ public interface BookCopyService {
 
     void allocate(BookCopy bookCopy);
 
-    PageBean<BookCopy> findCopies(Integer pageNum, Integer pageSize, String bookname, Integer status);
+    PageBean<BookCopy> findCopies(Integer pageNum, Integer pageSize, String bookName, Integer status, String bookId);
 
     void record(Borrow borrow);
 

@@ -21,7 +21,7 @@ public interface BookCopyMapper {
     void allocate(BookCopy bookCopy);
 
 //    @Select("SELECT b.title, bc.* FROM bookcopies bc JOIN books b ON bc.isbn = b.isbn WHERE b.title like CONCAT('%', #{bookName}, '%') and bc.status = '未借出'")
-    List<BookCopy> findCopies(String bookName, Integer status);
+    List<BookCopy> findCopies(String bookName, Integer status, String bookId);
 
     @Update("update bookcopies set status='已借出' where bookId=#{bookId}")
     void record(Borrow borrow);

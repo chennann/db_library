@@ -61,9 +61,10 @@ public class BookCopiesController {
             Integer pageNum,
             Integer pageSize,
             @RequestParam(required = false) String bookName,
-            @RequestParam(required = false) Integer status
+            @RequestParam(required = false) Integer status,
+            @RequestParam(required = false) String bookId
     ) {
-        PageBean<BookCopy> pg = bookCopyService.findCopies(pageNum, pageSize, bookName, status);
+        PageBean<BookCopy> pg = bookCopyService.findCopies(pageNum, pageSize, bookName, status, bookId);
         return Result.success(pg);
     }
 }

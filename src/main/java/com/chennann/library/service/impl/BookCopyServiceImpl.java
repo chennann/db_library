@@ -64,7 +64,7 @@ public class BookCopyServiceImpl implements BookCopyService {
 //    }
 
     @Override
-    public PageBean<BookCopy> findCopies(Integer pageNum, Integer pageSize, String bookName, Integer status) {
+    public PageBean<BookCopy> findCopies(Integer pageNum, Integer pageSize, String bookName, Integer status, String bookId) {
 
         PageBean<BookCopy> pb = new PageBean<>();
         PageHelper.startPage(pageNum, pageSize);
@@ -72,7 +72,7 @@ public class BookCopyServiceImpl implements BookCopyService {
         Map<String, Object> map = ThreadLocalUtil.get();
         Integer userId = (Integer) map.get("id");
 
-        List<BookCopy> as = bookCopyMapper.findCopies(bookName, status);
+        List<BookCopy> as = bookCopyMapper.findCopies(bookName, status, bookId);
         Page<BookCopy> p = (Page<BookCopy>) as;
 
         pb.setTotal(p.getTotal());
