@@ -29,7 +29,7 @@ public class Book {
     @NotNull(groups = Add.class)
     private Integer copies;
     private String librarianNumber;
-
+    private String bookCover;
     public interface Add extends Default {
 
     }

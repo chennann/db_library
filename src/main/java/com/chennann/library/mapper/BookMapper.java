@@ -14,8 +14,8 @@ public interface BookMapper {
     @Select("select * from books;")
     List<Book> listAllBooks();
 
-    @Insert("insert into books (isbn, title, author, publisher, publishdate, copies, librarianNumber) values " +
-            "(#{isbn}, #{title}, #{author}, #{publisher}, #{publishdate}, #{copies}, #{librarianNumber})")
+    @Insert("insert into books (isbn, title, author, publisher, publishdate, copies, librarianNumber, bookCover) values " +
+            "(#{isbn}, #{title}, #{author}, #{publisher}, #{publishdate}, #{copies}, #{librarianNumber}, #{bookCover})")
     void addBook(Book book);
 
     List<Book> findBooks(String title, String author, String isbn);
