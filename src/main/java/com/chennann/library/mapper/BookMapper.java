@@ -22,4 +22,7 @@ public interface BookMapper {
 
     @Update("update books set copies = #{copies} where isbn = #{isbn}")
     void updateCopies(Book book);
+
+    @Select("select * from books where isbn = #{isbn}")
+    Book findBookByISBN(String isbn);
 }

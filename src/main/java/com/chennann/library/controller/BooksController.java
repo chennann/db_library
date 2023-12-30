@@ -43,6 +43,17 @@ public class BooksController {
         return Result.success(bc);
     }
 
+    @PostMapping("/add/precheck")
+    public Result precheck (@RequestBody @Validated Book book) {
+        Book b = bookService.findBookByISBN(book.getIsbn());
+        if (b != null) {
+            return Result.success("已有图书");
+        }
+        else {
+            return Result.error("没有图书");
+        }
+    }
+
     @PostMapping("/add")
     public Result addBook (@RequestBody @Validated Book book) {
         PageBean<Book> bc = bookService.findBooks(1, 5, book.getTitle(), book.getAuthor(), book.getIsbn());

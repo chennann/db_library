@@ -63,4 +63,9 @@ public class BookServiceImpl implements BookService {
         bookMapper.updateCopies(book);
     }
 
+    @Override
+    public Book findBookByISBN(String isbn) {
+        return bookMapper.findBookByISBN(isbn);
+    }
+
 }

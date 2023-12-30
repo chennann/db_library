@@ -14,4 +14,6 @@ public interface BookService {
     PageBean<Book> findBooks(Integer pageNum, Integer pageSize, String title, String author, String isbn);
 
     void updateCopies(Book book);
+
+    Book findBookByISBN(String isbn);
 }
