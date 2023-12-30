@@ -13,7 +13,7 @@ public interface LibrarianMapper {
             " values (#{librarianNumber}, #{name})")
     void add(Librarian librarian);
 
-    @Select("select * from librarians where librarianNumber=#{librarianNumber} and name=#{name}")
+    @Select("select * from librarians where librarianNumber=#{librarianNumber} and BINARY name=#{name}")
     Librarian findLibrarian(String librarianNumber, String name);
 
     @Select("select * from librarians where librarianId =#{id}")

@@ -33,7 +33,7 @@
 
             </choose>
             <if test="bookId != null">
-                and bc.bookId = #{bookId}
+                and bc.bookId like CONCAT('%', #{bookId}, '%')
             </if>
         </where>
     </select>
