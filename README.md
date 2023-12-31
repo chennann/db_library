@@ -28,6 +28,14 @@
 
 ❓查询有“未借出”书本的book
 
-登陆大小写
+✅登陆大小写
 
-bookId模糊查询bookcopy
+✅bookId模糊查询bookcopy
+
+✅借出的书不允许放进阅览室
+
+✅读者登陆
+
+✅新书封面上传
+
+整理数据库中不合规的数据行（bookCover， password）

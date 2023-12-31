@@ -6,6 +6,7 @@ import com.chennann.library.service.BorrowService;
 import com.chennann.library.service.ReaderService;
 import com.chennann.library.utils.JwtUtil;
 import com.chennann.library.utils.Md5Util;
+import com.chennann.library.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -75,7 +76,6 @@ public class ReaderController {
     }
 
 
-    @RequireRole("librarian")
     @GetMapping("/listborrows")
     public Result<PageBean<Borrow>> listBorrowsByReaderId(
             Integer pageNum,
@@ -101,4 +101,12 @@ public class ReaderController {
         return Result.success();
     }
 
+    @GetMapping("/readerInfo")
+    public Result<Reader> readerInfo() {
+
+        Map<String, Object> map= ThreadLocalUtil.get();
+
+        Reader reader = readerService.findById((Integer) map.get("id"));
+        return Result.success(reader);
+    }
 }

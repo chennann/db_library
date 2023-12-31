@@ -48,10 +48,10 @@ public class BooksController {
     public Result precheck (@RequestBody @Validated Book book) {
         Book b = bookService.findBookByISBN(book.getIsbn());
         if (b != null) {
-            return Result.success("已有图书");
+            return Result.success(b);
         }
         else {
-            return Result.error("没有图书");
+            return Result.success("没有图书");
         }
     }
 
