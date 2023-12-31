@@ -1,5 +1,6 @@
 package com.chennann.library.controller;
 
+import com.chennann.library.anno.RequireRole;
 import com.chennann.library.pojo.Librarian;
 import com.chennann.library.service.LibrarianService;
 import com.chennann.library.pojo.Result;
@@ -25,6 +26,7 @@ public class LibrarianController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @RequireRole("librarian")
     @PostMapping("/add")
     public Result add (@RequestBody Librarian librarian) {
         librarianService.add(librarian);
@@ -42,6 +44,7 @@ public class LibrarianController {
             claims.put("id", librarian.getLibrarianId());
             claims.put("number", librarian.getLibrarianNumber());
             claims.put("name", librarian.getName());
+            claims.put("role", "librarian");
             String token = JwtUtil.genToken(claims);
             ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
             operations.set(token, token, 1, TimeUnit.HOURS);
@@ -49,6 +52,7 @@ public class LibrarianController {
         }
     }
 
+    @RequireRole("librarian")
     @GetMapping("/librarianInfo")
     public Result<Librarian> userInfo () {
 

@@ -5,6 +5,7 @@ import com.chennann.library.pojo.BookCopy;
 import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Reader;
 import com.chennann.library.service.ReaderService;
+import com.chennann.library.utils.Md5Util;
 import com.chennann.library.utils.ThreadLocalUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -23,6 +24,9 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public void add(Reader reader) {
+
+        String md5String = Md5Util.getMD5String(reader.getPassword());
+        reader.setPassword(md5String);
         readerMapper.add(reader);
     }
 

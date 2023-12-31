@@ -1,5 +1,6 @@
 package com.chennann.library.interceptors;
 
+import com.chennann.library.anno.RequireRole;
 import com.chennann.library.utils.JwtUtil;
 import com.chennann.library.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Map;
@@ -29,23 +31,42 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
 
+        String redisToken;
+        Map<String, Object> claims;
         try {
 
             ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-            String redisToken = operations.get(token);
+            redisToken = operations.get(token);
 
             if (redisToken == null) {
                 throw new RuntimeException();
             }
-            Map<String, Object> claims = JwtUtil.parseToken(token);
+            claims = JwtUtil.parseToken(token);
 
-            ThreadLocalUtil.set(claims);
 
-            return true;
         } catch (Exception e) {
             response.setStatus(401);
             return false;
         }
+
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod method = (HandlerMethod) handler;
+            RequireRole requireRole = method.getMethodAnnotation(RequireRole.class);
+
+            if (requireRole != null) {
+                // 获取当前用户的角色
+                String currentUserRole = claims.get("role").toString();
+
+                // 检查用户是否有所需的角色
+                if (!requireRole.value().equals(currentUserRole)) {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
+                    return false;
+                }
+            }
+        }
+
+        ThreadLocalUtil.set(claims);
+        return true;
     }
 
 

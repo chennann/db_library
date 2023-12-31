@@ -1,6 +1,7 @@
 package com.chennann.library.controller;
 
 
+import com.chennann.library.anno.RequireRole;
 import com.chennann.library.pojo.Book;
 import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Result;
@@ -22,7 +23,6 @@ public class BooksController {
     @Autowired
     private BookCopyService bookCopyService;
 
-
     @GetMapping("/find")
     public Result<PageBean<Book>> findBooks (
             Integer pageNum,
@@ -43,6 +43,7 @@ public class BooksController {
         return Result.success(bc);
     }
 
+    @RequireRole("librarian")
     @PostMapping("/add/precheck")
     public Result precheck (@RequestBody @Validated Book book) {
         Book b = bookService.findBookByISBN(book.getIsbn());
@@ -54,6 +55,7 @@ public class BooksController {
         }
     }
 
+    @RequireRole("librarian")
     @PostMapping("/add")
     public Result addBook (@RequestBody @Validated Book book) {
         PageBean<Book> bc = bookService.findBooks(1, 5, book.getTitle(), book.getAuthor(), book.getIsbn());

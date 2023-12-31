@@ -1,5 +1,6 @@
 package com.chennann.library.controller;
 
+import com.chennann.library.anno.RequireRole;
 import com.chennann.library.pojo.BookCopy;
 import com.chennann.library.pojo.PageBean;
 import com.chennann.library.pojo.Result;
@@ -19,6 +20,7 @@ public class BookCopiesController {
     @Autowired
     private BookCopyService bookCopyService;
 
+    @RequireRole("librarian")
     @PutMapping("/allocate")
     public Result allocate (@RequestBody @Validated BookCopy bookCopy) {
         String bookId = bookCopy.getBookId();

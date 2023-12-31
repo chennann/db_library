@@ -1,5 +1,6 @@
 package com.chennann.library.controller;
 
+import com.chennann.library.anno.RequireRole;
 import com.chennann.library.pojo.*;
 import com.chennann.library.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class BorrowController {
     private EmailService emailService;
 
 
+    @RequireRole("librarian")
     @PostMapping("/record")
     public Result record(@RequestBody @Validated Borrow borrow) {
 //        System.out.println(borrow);
@@ -59,6 +61,7 @@ public class BorrowController {
     }
 
 
+    @RequireRole("librarian")
     @PostMapping("/returnCopy")
     public Result<Borrow> returnCopy (@RequestBody Map<String, String> map) {
         String borrowingId = map.get("borrowingId");
