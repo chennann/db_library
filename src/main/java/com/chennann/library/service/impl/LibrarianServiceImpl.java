@@ -7,6 +7,8 @@ import com.chennann.library.service.LibrarianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibrarianServiceImpl implements LibrarianService {
 
@@ -30,5 +32,11 @@ public class LibrarianServiceImpl implements LibrarianService {
 
         Librarian librarian = librarianMapper.findByLibrarianId(id);
         return librarian;
+    }
+
+    @Override
+    public List<Librarian> list() {
+
+        return librarianMapper.list();
     }
 }

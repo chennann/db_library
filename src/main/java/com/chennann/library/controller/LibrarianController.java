@@ -11,7 +11,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -61,5 +63,15 @@ public class LibrarianController {
         Librarian librarian = librarianService.findByLibrarianId((Integer) map.get("id"));
 
         return Result.success(librarian);
+    }
+
+    @RequireRole("librarian")
+    @GetMapping("/list")
+    public  Result<List<Librarian>> list () {
+        List<Librarian> librarianList = new ArrayList<>();
+
+        librarianList = librarianService.list();
+
+        return Result.success(librarianList);
     }
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface LibrarianMapper {
 
@@ -18,4 +20,7 @@ public interface LibrarianMapper {
 
     @Select("select * from librarians where librarianId =#{id}")
     Librarian findByLibrarianId(Integer id);
+
+    @Select("select * from librarians")
+    List<Librarian> list();
 }
