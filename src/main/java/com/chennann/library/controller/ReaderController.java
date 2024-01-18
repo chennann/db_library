@@ -120,9 +120,11 @@ public class ReaderController {
     @PostMapping("/readerIdByName")
     public Result<Reader> getReaderIdByName (String name) {
 
-        System.out.println(name);
         Reader reader = readerService.findByName(name);
 
+        if (reader == null) {
+            return Result.error("知不道指定读者");
+        }
         return Result.success(reader);
     }
 }
