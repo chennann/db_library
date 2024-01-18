@@ -66,4 +66,15 @@ public class ReaderServiceImpl implements ReaderService {
     public void updateReader(Reader reader) {
         readerMapper.updateReader(reader);
     }
+
+    @Override
+    public List<String> listReaderNames() {
+
+        return readerMapper.listReaderNames();
+    }
+
+    @Override
+    public Reader findByName(String name) {
+        return readerMapper.findByName(name);
+    }
 }

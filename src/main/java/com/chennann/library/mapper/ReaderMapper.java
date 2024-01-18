@@ -25,4 +25,10 @@ public interface ReaderMapper {
 
     @Update("update readers set name=#{name},phone=#{phone},email=#{email} where readerId=#{readerId}")
     void updateReader(Reader reader);
+
+    @Select("select name from readers")
+    List<String> listReaderNames();
+
+    @Select("select readerId, name, phone, email from readers where name = #{name}")
+    Reader findByName(String name);
 }

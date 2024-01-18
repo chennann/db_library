@@ -16,4 +16,8 @@ public interface ReaderService {
     void deleteReaderById(Integer readerId);
 
     void updateReader(Reader reader);
+
+    List<String> listReaderNames();
+
+    Reader findByName(String name);
 }

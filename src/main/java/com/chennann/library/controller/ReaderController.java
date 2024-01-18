@@ -1,6 +1,7 @@
 package com.chennann.library.controller;
 
 import com.chennann.library.anno.RequireRole;
+import com.chennann.library.mapper.ReaderMapper;
 import com.chennann.library.pojo.*;
 import com.chennann.library.service.BorrowService;
 import com.chennann.library.service.ReaderService;
@@ -107,6 +108,21 @@ public class ReaderController {
         Map<String, Object> map= ThreadLocalUtil.get();
 
         Reader reader = readerService.findById((Integer) map.get("id"));
+        return Result.success(reader);
+    }
+
+    @GetMapping("/names")
+    public Result<List<String>> listReaderNames () {
+        List<String> readerNames = readerService.listReaderNames();
+        return Result.success(readerNames);
+    }
+
+    @PostMapping("/readerIdByName")
+    public Result<Reader> getReaderIdByName (String name) {
+
+        System.out.println(name);
+        Reader reader = readerService.findByName(name);
+
         return Result.success(reader);
     }
 }
