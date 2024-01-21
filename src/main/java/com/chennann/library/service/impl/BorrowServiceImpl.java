@@ -144,5 +144,11 @@ public class BorrowServiceImpl implements BorrowService {
         return pb;
     }
 
+    @Override
+    public void setFine(Borrow borrow) {
+
+            borrowMapper.setFine(borrow);
+    }
+
 
 }

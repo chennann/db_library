@@ -115,7 +115,7 @@ public class BorrowController {
             long fine = hoursOverdue * 2;
             borrow.setFine(fine);
         }
-
+        borrowService.setFine(borrow);
         return Result.success(borrow);
     }
 }

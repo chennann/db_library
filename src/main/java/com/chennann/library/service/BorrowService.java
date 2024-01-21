@@ -25,4 +25,6 @@ public interface BorrowService {
     PageBean<Borrow> listAllBorrows(Integer pageNum, Integer pageSize);
 
     PageBean<Borrow> listBorrowsByReaderIdAndStatus(Integer pageNum, Integer pageSize, Integer readerId, Integer status);
+
+    void setFine(Borrow borrow);
 }

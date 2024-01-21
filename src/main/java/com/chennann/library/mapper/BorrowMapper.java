@@ -37,4 +37,7 @@ public interface BorrowMapper {
     List<Borrow> listAllBorrows();
 
     List<Borrow> listBorrowsByReaderIdAndStatus(Integer readerId, Integer status);
+
+    @Update("update borrowings set fine=#{fine} where borrowingId=#{borrowingId}")
+    void setFine(Borrow borrow);
 }
